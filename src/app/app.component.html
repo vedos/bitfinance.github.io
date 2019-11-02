@@ -1,0 +1,178 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style>
+  :host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 8px 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar {
+    height: 60px;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(250, 144, 73);
+    color: white;
+    font-weight: 600;
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .toolbar #twitter-logo:hover {
+    opacity: 0.8;
+  }
+
+  .content {
+    display: block;
+    margin: 32px auto;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  a,
+  a:visited,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #125699;
+  }
+
+
+  footer {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+  }
+
+  footer a {
+    display: flex;
+    align-items: center;
+  }
+
+  svg#clouds {
+    position: fixed;
+    bottom: -160px;
+    left: -230px;
+    z-index: -10;
+    width: 1920px;
+  }
+
+
+  /* Responsive Styles */
+  @media screen and (max-width: 767px) {
+
+    .card-container > *:not(.circle-link) ,
+    .terminal {
+      width: 100%;
+    }
+
+    .card:not(.highlight-card) {
+      height: 16px;
+      margin: 8px 0;
+    }
+
+    .card.highlight-card span {
+      margin-left: 72px;
+    }
+
+    svg#rocket-smoke {
+      right: 120px;
+      transform: rotate(-5deg);
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    svg#rocket-smoke {
+      display: none;
+      visibility: hidden;
+    }
+  }
+</style>
+
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <a routerLink="/">
+  <img
+    width="70"
+    alt="Angular Logo"
+    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAeCAMAAAD5PBdlAAACalBMVEVHcEz////////////zdAb////xegT////////////////////////7kgL////////////////////////////////////////8gAX/////2rz/////////////////////////////////////////////////hwT////////////+bQr////////////////////////whgX4gQX////obAT/gwXkZgT3gQX////////////////////////////rbwTzdQb////raQf2hAP////qcAP+fQb/////////////////jgb/////////////////hQX+dgjwfQP////sdQT/////dgn////+egfvggXnaATueQT1gQToagT////////////6hwL+mwD////////////whgbnaAT7hgTkZAXnaQToXgXpcAT0hAP////5lQD////JUgT/lgH+iRT7iQL9jgLeXwb+mgHPZgO8WQPCUALHUQLrdgXqYwX3iwHgawTlWgnoWwn+rFr+lSzykAb+pEn+lSvOWQT/lQH6fAbRYwTlbATlYgTnYAX0gwPxZAbeYAX7bgrdWAP1aAv7iAL5fQX+lQLykQa/Uwj2lgToZQb+ggb+lCr+kyf/mgDnggTxjAX0gQLwewL/fAfYWwXefwH////iYQXufAXtdgT/lwH/kALvhATrYQXsbwX+gAb+jAP/eAj+dAnvegP/kwLscwP/mwDrawbrZgX0gwL1hgL3igHufwX6jgH8cQr7kwH+hwX/gwbyfgL+fAbnagT8ZwvobgP+bQrXZwPfbgTSWAPxZAn1bAveWduEAAAAp3RSTlMA+n+NEfcFlUbGM8xNJZI6/MnQgykKp/EULAJSHVpjtDh12XEFDPUqq6/pgme6ITbuoSwKkyyH/ngl1N4P48ATgSNJDhoo/MoZhoiYzAhrVVjKys2ezXv91yn9zYGB/T6Km/70/S5fzXjOtFf17bN5+EEo+vnd6cu3/eH9y9P5+dt+/mK3zuKX/pej22PT2+m8ocv8/Fr9fMPopd848ci7lv7TKvz+/rSzOPcAAAYeSURBVHhevdd3XxpJGAdwiqCgoIgN0BBAEQhE0eRULNiNGlusMWo0Jp5J7Om9Xnou/XrLXXIP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"
+  />
+</a>
+  <span>BitFinance</span>
+    <div class="spacer"></div>
+
+    <nav class="navbar navbar-expand" *ngIf="currentUser">
+      <div class="navbar-nav">
+          <a class="nav-item nav-link" (click)="logout()">Logout</a>
+      </div>
+  </nav>
+
+
+  
+</div>
+
+<div class="content" role="main">
+<!-- main app container -->
+              <router-outlet></router-outlet>
+              <app-alert></app-alert>
+  <!-- Footer -->
+  <footer>
+
+  </footer>
+
+  <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
+    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
+  </svg>
+
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
