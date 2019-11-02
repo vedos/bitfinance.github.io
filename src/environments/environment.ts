@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://ebit-front-test.herokuapp.com'
+  apiUrl: 'https://ebit-front-test.herokuapp.com'
 };
 
 /*
