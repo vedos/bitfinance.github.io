@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders,HttpErrorResponse, HttpHeaderResponse  } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Token } from '../_models';
 import { environment } from '../../environments/environment'
@@ -10,8 +10,6 @@ import { environment } from '../../environments/environment'
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<Token>;
     public currentUser: Observable<Token>;
-
-
 
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<Token>(JSON.parse(localStorage.getItem('currentUser')));
@@ -23,10 +21,11 @@ export class AuthenticationService {
     }
 
     login(username, password) {
-        
         const data = {'username': username, 'password': password};
         const config = { headers: new HttpHeaders()
-        .append('Content-Type', 'application/json') };
+        .append('Content-Type', 'application/json')
+        .append('Access-Control-Allow-Origin', 'http://localhost:4200')
+        .append('Access-Control-Allow-Methods', 'GET,POST, OPTIONS') };
 
         return this.http.post<any>(`${environment.apiUrl}/login`,  data, config)
             .pipe(map(token => {
@@ -34,8 +33,7 @@ export class AuthenticationService {
                 localStorage.setItem('currentUser', JSON.stringify(token));
                 this.currentUserSubject.next(token);
                 return token;
-            })
-        );
+            }));
     }
 
     logout() {

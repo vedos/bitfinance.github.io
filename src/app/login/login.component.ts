@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AlertService,AuthenticationService } from '../_service';
+import { AlertService,AuthenticationService } from '../_services';
 
 @Component({
   selector: 'app-login',
@@ -50,8 +50,8 @@ export class LoginComponent implements OnInit {
     // stop here if form is invalid
     if (this.loginForm.invalid) {
         return;
-    }
-
+    }    
+    
     this.loading = true;
     this.authenticationService.login(this.f.username.value, this.f.password.value)
         .pipe(first())
@@ -64,7 +64,6 @@ export class LoginComponent implements OnInit {
                 this.loading = false;
             });
 }
-
 }
 
 

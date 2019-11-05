@@ -1,0 +1,64 @@
+<h4 class="text-secondary">Users of budget {{budgetInfo.name}}</h4><br>
+<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush" *ngFor="let info of budgetInfo.budget_users">
+        <li class="list-group-item">{{info.name}}</li>
+    </ul>
+
+</div>
+<br>
+<div class="input-group mb-3">
+    <button class="btn btn-outline-primary" (click)="open(content)">Beneficiary</button>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Budget update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="beneficiaryForm" >
+            <div class="form-group">
+                <label for="userId">Beneficiary</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" placeholder="Enter user id"
+                        formControlName="userId">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close(beneficiaryForm.value.userId)"
+                    [disabled]="!beneficiaryForm.valid">Save</button>
+            </div>
+        </form>
+    </div>
+
+</ng-template>
+
+
+<div class="card card-body">
+    <h4 class="text-secondary"> Transactions </h4>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date from</th>
+                    <th scope="col">Date to</th>
+                    <th scope="col">Creted</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="">
+                    <th scope="row"></th>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <br>
+    <div class="input-group mb-3">
+            <button class="btn btn-outline-info">Transaction</button>
+        </div>

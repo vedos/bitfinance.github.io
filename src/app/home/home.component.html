@@ -1,1 +1,90 @@
-<p>home works!</p>
+<h2 class="text-secondary">Welcome to BitFinance!</h2>
+<p>
+    <a class="btn btn-light" data-toggle="collapse" href="#collapseMyBudget" role="button" aria-expanded="true"
+        aria-controls="collapseMyBudget">
+        My budgets
+    </a>
+</p>
+<div class="collapse multi-collapse show" id="collapseMyBudget">
+    <div class="card card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date from</th>
+                    <th scope="col">Date to</th>
+                    <th scope="col">Creted</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let budget of budgets">
+                    <th scope="row">{{ budget.id }}</th>
+                    <td>{{ budget.name }}</td>
+                    <td>{{ budget.amount }}</td>
+                    <td>{{ budget.date_from | date : "dd.MM.y"  }}</td>
+                    <td>{{ budget.date_to | date : "dd.MM.y"  }}</td>
+                    <td>{{ budget.date_created | date : "dd.MM.y"  }}</td>
+                    <td>
+                        <button (click)="selectBudget(budget.id)" type="button" [disabled]="loading" class="btn btn-outline-secondary" title="Make Transactions / Add Beneficiary">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Select
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="col-xs-12" style="height:20px;"></div>
+
+<p>
+    <a class="btn btn-outline-info" data-toggle="collapse" href="#collapseNewBudget" role="button" aria-expanded="false"
+        aria-controls="collapseNewBudget">
+        New budget
+    </a>
+</p>
+<div class="collapse multi-collapse" id="collapseNewBudget">
+    <div class="card card-body">
+        <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="budgetName">Budget name</label>
+                <input type="text" class="form-control" formControlName="budgetName" id="budgetName"
+                    placeholder="eg. home budget" [ngClass]="{ 'is-invalid': submitted && f.budgetName.errors }">
+                <div *ngIf="submitted && f.budgetName.errors" class="invalid-feedback">
+                    <div *ngIf="f.budgetName.errors.required">Budget name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" class="form-control" formControlName="amount" id="amount" placeholder="eg. 400"
+                    [ngClass]="{ 'is-invalid': submitted && f.amount.errors }">
+                <div *ngIf="submitted && f.amount.errors" class="invalid-feedback">
+                    <div *ngIf="f.amount.errors.required">Budget name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dpFrom">Date from</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dpFrom" [(ngModel)]="dateFrom"
+                        ngbDatepicker #d="ngbDatepicker" [ngModelOptions]="{standalone: true}" (click)="d.toggle()">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dpTo">Date to</label>
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd" name="dpTo" [(ngModel)]="dateTo" ngbDatepicker
+                        #dd="ngbDatepicker" [ngModelOptions]="{standalone: true}" (click)="dd.toggle()">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" [disabled]="loading" class="btn btn-light">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Add budget
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
