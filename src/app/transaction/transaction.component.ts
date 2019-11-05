@@ -5,6 +5,9 @@ import { AlertService, BudgetService, TransactionService } from '../_services';
 import { NgbModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { map } from 'rxjs/operators';
+import { Chart } from 'chart.js';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-transaction',
@@ -20,16 +23,50 @@ export class TransactionComponent implements OnInit {
   transactionForm: FormGroup;
   transactions: TransactionViewModel[];
   beneficiaryForm: FormGroup;
+  chart: Chart;
 
   constructor(private route: ActivatedRoute,
     private budgetService: BudgetService,
     private transactionService: TransactionService,
     private alertService: AlertService,
     private modalService: NgbModal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private datePipe: DatePipe
     ) { 
       this.budgetInfo = new BudgetResponseExt(); 
       this.transactions = [];
+    }
+
+    private createChart(){
+      this.chart = new Chart('canvas', {
+        type: 'line',
+        data: {
+          labels: this.transactions.map(x=> this.datePipe.transform(x.datetime, 'dd.MM.yyyy HH:mm ')),
+          datasets: [
+            {
+              label: 'Amount in KM',
+              data: this.transactions.map(x=>x.amount),
+              backgroundColor: 'LightBlue'
+            }
+          ]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Amount in KM'
+              }
+            }],
+            xAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Date'
+              }
+            }]
+          }
+        }
+      });
     }
 
     private createBeneficiaryForm() {
@@ -123,6 +160,7 @@ export class TransactionComponent implements OnInit {
     ).subscribe(
       data => {
         this.transactions = data;
+        this.createChart();
       },
       error => {
         this.alertService.error(error);

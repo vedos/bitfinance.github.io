@@ -75,6 +75,7 @@ export class HomeComponent implements OnInit {
     this.budgetForm.value.date_from = this.convertToDate(this.dateFrom).toJSON();
 
     this.loading = true;
+    console.log(this.budgetForm.value);
     
     this.budgetService.budget(this.budgetForm.value)
       .pipe(first())

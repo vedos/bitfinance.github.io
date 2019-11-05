@@ -57,7 +57,7 @@
         </tbody>
     </table>
     <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="transactions.length"></ngb-pagination>
-  
+
 </div>
 <br>
 <div class="input-group mb-3">
@@ -100,8 +100,13 @@
             </div>-->
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" (click)="modal.close(transactionForm.value)"
-                [disabled]="!transactionForm.valid">Save</button>
+                    [disabled]="!transactionForm.valid">Save</button>
             </div>
         </form>
     </div>
 </ng-template>
+
+
+<div>
+    <canvas id="canvas">{{ chart }}</canvas>
+</div>
