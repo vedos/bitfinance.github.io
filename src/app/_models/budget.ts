@@ -21,5 +21,6 @@ export class BudgetResponseExt extends BudgetResponse {
 }
 
 export class BudgetUser {
-    name: string
+    id:number;
+    name: string;
 }

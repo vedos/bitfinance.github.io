@@ -51,7 +51,7 @@ export class TransactionComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {      
       console.log("Save "+ result);
       //call api if result number
-      this.budgetInfo.budget_users.push({ "name": "eurobit" });
+      this.budgetInfo.budget_users.push({ "name": result, "id":result });
 
     }, (reason) => {
       console.log("Don't save");
@@ -79,10 +79,12 @@ export class TransactionComponent implements OnInit {
       "owner": [11],
       "budget_users": [
         {
-          "name": "eurobit"
+          "name": "eurobit",
+          "id":1
         },
         {
-          "name": "eurobit1"
+          "name": "eurobit1",
+          "id":2
         }
       ] 
     }
