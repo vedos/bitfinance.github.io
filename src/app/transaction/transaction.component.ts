@@ -39,8 +39,9 @@ export class TransactionComponent implements OnInit {
           this.id = +params['id'];
         }
       );
-    //this.getBudget();
-    this.getLocalBudget();
+    this.getBudget();
+    this.getTransactions();
+   // this.getLocalBudget();
   }
 
   open(content) {

@@ -26,17 +26,6 @@ export class HomeComponent implements OnInit {
     private budgetService: BudgetService,
     private alertService: AlertService,
     ) {
-      this.budgets.push(
-        {
-          id:1,
-          amount: 2,
-          name: "",
-          date_created: new Date(),
-          date_from: new Date(),
-          date_to: new Date(),
-          owner: [1]
-        }
-      );
     }
 
   ngOnInit() {
@@ -46,7 +35,7 @@ export class HomeComponent implements OnInit {
       date_to: Date,
       date_from: Date
     });
-    //this.loadBudgets();
+    this.loadBudgets();
   }
 
   //load all budgets from api
