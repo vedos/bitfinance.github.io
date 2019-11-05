@@ -29,7 +29,6 @@
                     <td>{{ budget.date_created | date : "dd.MM.y"  }}</td>
                     <td>
                         <button (click)="selectBudget(budget.id)" type="button" [disabled]="loading" class="btn btn-outline-secondary" title="Make Transactions / Add Beneficiary">
-                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             Select
                         </button>
                     </td>
@@ -50,11 +49,11 @@
     <div class="card card-body">
         <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <label for="budgetName">Budget name</label>
-                <input type="text" class="form-control" formControlName="budgetName" id="budgetName"
-                    placeholder="eg. home budget" [ngClass]="{ 'is-invalid': submitted && f.budgetName.errors }">
-                <div *ngIf="submitted && f.budgetName.errors" class="invalid-feedback">
-                    <div *ngIf="f.budgetName.errors.required">Budget name is required</div>
+                <label for="name">Budget name</label>
+                <input type="text" class="form-control" formControlName="name" id="name"
+                    placeholder="eg. home budget" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <div *ngIf="f.name.errors.required">Budget name is required</div>
                 </div>
             </div>
             <div class="form-group">
@@ -80,7 +79,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" [disabled]="loading" class="btn btn-light">
+                <button type="submit" [disabled]="loading || budgetForm.invalid" class="btn btn-light">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Add budget
                 </button>

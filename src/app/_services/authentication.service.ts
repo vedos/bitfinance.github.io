@@ -23,9 +23,7 @@ export class AuthenticationService {
     login(username, password) {
         const data = {'username': username, 'password': password};
         const config = { headers: new HttpHeaders()
-        .append('Content-Type', 'application/json')
-        .append('Access-Control-Allow-Origin', 'http://localhost:4200')
-        .append('Access-Control-Allow-Methods', 'GET,POST, OPTIONS') };
+        .append('Content-Type', 'application/json') };
 
         return this.http.post<any>(`${environment.apiUrl}/login`,  data, config)
             .pipe(map(token => {

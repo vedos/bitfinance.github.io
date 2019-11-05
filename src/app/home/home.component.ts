@@ -6,7 +6,6 @@ import { first } from 'rxjs/operators';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,18 +24,29 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private budgetService: BudgetService,
-    private alertService: AlertService) {
-     
+    private alertService: AlertService,
+    ) {
+      this.budgets.push(
+        {
+          id:1,
+          amount: 2,
+          name: "",
+          date_created: new Date(),
+          date_from: new Date(),
+          date_to: new Date(),
+          owner: [1]
+        }
+      );
     }
 
   ngOnInit() {
     this.budgetForm = this.formBuilder.group({
-      budgetName: ['', Validators.required],
+      name: ['', Validators.required],
       amount: ['', Validators.required],
-      dateTo: Date,
-      dateFrom: Date
+      date_to: Date,
+      date_from: Date
     });
-    this.loadBudgets();
+    //this.loadBudgets();
   }
 
   //load all budgets from api
@@ -70,19 +80,17 @@ export class HomeComponent implements OnInit {
     if (this.budgetForm.invalid) {
       return;
     }
-    this.budgetForm.value.dateTo = this.convertToDate(this.dateTo);
-    this.budgetForm.value.dateFrom = this.convertToDate(this.dateFrom);
+    this.budgetForm.value.date_to = this.convertToDate(this.dateTo).toJSON();
+    this.budgetForm.value.date_from = this.convertToDate(this.dateFrom).toJSON();
 
     this.loading = true;
-
-    console.log(this.budgetForm.value);
-
     
     this.budgetService.budget(this.budgetForm.value)
       .pipe(first())
       .subscribe(
         data => {
           this.loadBudgets(); //reload budgets after new is added
+          this.resetForm();
           this.alertService.success('Budget ' + data.name + ' successfully added', true);
         },
         error => {
@@ -91,8 +99,19 @@ export class HomeComponent implements OnInit {
         });
   }
 
+  resetForm(){
+    this.loading = false;
+    this.budgetForm.reset();
+    this.dateFrom = null;
+    this.dateTo = null;
+    Object.keys(this.budgetForm.controls).forEach(key => { //clear all errors
+      this.budgetForm.controls[key].setErrors(null)
+    });
+  }
+
   convertToDate(date: NgbDateStruct): Date {
     return date ? new Date(date.year, date.month - 1, date.day) : null;
   }
+
 }
 

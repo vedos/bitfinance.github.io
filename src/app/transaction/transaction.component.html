@@ -42,17 +42,21 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Date from</th>
-                    <th scope="col">Date to</th>
-                    <th scope="col">Creted</th>
-                    <th scope="col"></th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Tyoe</th>
+                    <th scope="col">Amount in KM</th>
+                    <th scope="col">Person</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="">
-                    <th scope="row"></th>
+                <tr *ngFor="let transaction of transactions">
+                    <th scope="row">{{transaction.id}}</th>
+                    <td>{{ transaction.datetime | date : "dd.MM.y"  }}</td>
+                    <td>{{ transaction.description }}</td>
+                    <td>{{ transaction.type }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.person }}</td>
                 </tr>
             </tbody>
         </table>

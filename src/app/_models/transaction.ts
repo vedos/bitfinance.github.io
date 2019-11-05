@@ -13,5 +13,15 @@ export class TransactionResponse {
     datetime: Date;
     person: number;
     budget: number;
-    typ: string;
+    type: string;
 }
+
+export class TransactionViewModel {
+    id: number;
+    description: string;
+    amount: number;
+    datetime: Date;
+    person: string;
+    type: string;
+}
+
