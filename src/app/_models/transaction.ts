@@ -25,3 +25,6 @@ export class TransactionViewModel {
     type: string;
 }
 
+export class Beneficiary {
+    beneficiary: number;
+}

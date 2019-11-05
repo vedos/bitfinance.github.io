@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment'
-import {BudgetRequest, BudgetResponseExt, BudgetResponse } from '../_models'
+import {BudgetRequest, BudgetResponseExt, BudgetResponse, Beneficiary } from '../_models'
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class BudgetService {
     return this.http.get<BudgetResponse[]>(`${environment.apiUrl}/budget`);
   }
 
-  beneficiary(id: number) {
-    return this.http.get<BudgetResponseExt>(`${environment.apiUrl}/budget/${id}/beneficiary`);
+  beneficiary(id: number,beneficiary: Beneficiary ) {
+    return this.http.put<BudgetResponseExt>(`${environment.apiUrl}/budget/${id}/beneficiary`,beneficiary);
   }
 }

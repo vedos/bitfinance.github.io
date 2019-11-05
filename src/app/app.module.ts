@@ -14,9 +14,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { TransactionComponent } from './transaction/transaction.component';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +30,7 @@ import { TransactionComponent } from './transaction/transaction.component';
     HttpClientModule,
     NgbModule,
     FormsModule
+    
   ],
   providers: [
     { provide: ErrorHandler, useClass: GlobalErrorHandler },

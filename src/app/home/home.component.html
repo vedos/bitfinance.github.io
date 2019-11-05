@@ -10,7 +10,6 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Date from</th>
@@ -20,21 +19,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let budget of budgets">
-                    <th scope="row">{{ budget.id }}</th>
+                <tr *ngFor="let budget of budgets | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize ">
+                    
                     <td>{{ budget.name }}</td>
                     <td>{{ budget.amount }}</td>
                     <td>{{ budget.date_from | date : "dd.MM.y"  }}</td>
                     <td>{{ budget.date_to | date : "dd.MM.y"  }}</td>
                     <td>{{ budget.date_created | date : "dd.MM.y"  }}</td>
                     <td>
-                        <button (click)="selectBudget(budget.id)" type="button" [disabled]="loading" class="btn btn-outline-secondary" title="Make Transactions / Add Beneficiary">
+                        <button (click)="selectBudget(budget.id)" type="button" [disabled]="loading"
+                            class="btn btn-outline-secondary" title="Make Transactions / Add Beneficiary">
                             Select
                         </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="budgets.length"></ngb-pagination>
     </div>
 </div>
 <div class="col-xs-12" style="height:20px;"></div>
@@ -50,8 +51,8 @@
         <form [formGroup]="budgetForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="name">Budget name</label>
-                <input type="text" class="form-control" formControlName="name" id="name"
-                    placeholder="eg. home budget" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                <input type="text" class="form-control" formControlName="name" id="name" placeholder="eg. home budget"
+                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                 <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                     <div *ngIf="f.name.errors.required">Budget name is required</div>
                 </div>

@@ -11,11 +11,11 @@ export class LoggingService {
             if (error instanceof HttpErrorResponse) {
                 console.error('There was an HTTP error.', error.message, 'Status code:', (<HttpErrorResponse>error).status);
             } else if (error instanceof TypeError) {
-                console.error('There was a Type error.', error.message);
+                console.error('There was a Type error.', error.message, error.stack);
             } else if (error instanceof Error) {
-                console.error('There was a general error.', error.message);
+                console.error('There was a general error.', error.message,  error.stack);
             } else {
-                console.error('Something happened!', error);
+                console.error('Something happened!', error,  error.stack);
             }
         }
 }

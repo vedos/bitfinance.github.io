@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 
 export class HomeComponent implements OnInit {
+  page :number = 1;
+  pageSize :number = 5;
   budgetForm: FormGroup;
   request: BudgetRequest;
   loading = false;
@@ -52,7 +54,7 @@ export class HomeComponent implements OnInit {
 
   selectBudget(id: string)
   {
-    this.router.navigate([`/transaction/${id}`], { skipLocationChange: true });
+    this.router.navigate([`/transaction/${id}`]);
   }
 
 
