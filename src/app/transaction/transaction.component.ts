@@ -103,7 +103,6 @@ export class TransactionComponent implements OnInit {
       if(result === this.transactionForm.value){ //check which modal is triggered
         //this.transactionForm.value.datetime = this.convertToDate(this.transactionForm.value.datetime).toJSON();
         this.transactionForm.value.budget = this.id;
-        console.log(this.transactionForm.value);
         this.transactionService.transaction(this.transactionForm.value).subscribe(
           data => {
             this.resetForm();
@@ -126,7 +125,6 @@ export class TransactionComponent implements OnInit {
       }
     }, (reason) => {
       //modal closed
-      console.log("close");
     });
   }
 
